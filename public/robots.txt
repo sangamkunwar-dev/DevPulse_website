@@ -1,0 +1,4 @@
+User-agen: *
+Allow: /
+
+Sitemap: https://dev-pulse.dev/sitemap.xml
