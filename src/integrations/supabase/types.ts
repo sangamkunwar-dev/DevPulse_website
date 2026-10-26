@@ -1,5 +1,5 @@
-export type Json =
-  | string 
+export type Json = 
+  | string
   | number
   | boolean
   | null
@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-    _InternalSupabase: {
+    _InernalSupabase: {
         PostgrestVersion: "14.5"
     }
     public: {
@@ -39,7 +39,7 @@ export type Database = {
                 }
                 Relationships: []
             }
-            app_congig: {
+            app_config: {
                 Row: {
                     key: string
                     value: string
@@ -54,7 +54,7 @@ export type Database = {
                 }
                 Relationships: []
             }
-            challenge_attemps: {
+            challenge_attempts: {
                 Row: {
                     answer: string
                     challenge_id: string
@@ -81,7 +81,7 @@ export type Database = {
                 }
                 Relationships: [
                     {
-                        foreignKeyName: "challenge_attemps_challenge_id_fkey"
+                        foreignKeyName: "challenge_attempts_challenge_id_fkey"
                         columns: ["challenge_id"]
                         isOneToOne: false
                         referencedRelation: "challenges"
@@ -107,9 +107,9 @@ export type Database = {
                 }
                 Relationships: [
                     {
-                        foreginKeyName: "challenge_solutions_challenge_id_fkey"
+                        foreignKeyName: "challenge_solutions_challenge_id_fkey"
                         columns: ["challenge_id"]
-                        isOneToOne: false
+                        isOneToOne: true
                         referencedRelation: "challenges"
                         referencedColumns: ["id"]
                     },
@@ -121,7 +121,7 @@ export type Database = {
                     broken_code: string
                     created_at: string
                     difficulty: string
-                    explanation: string
+                    explantion: string
                     hint: string | null
                     id: string
                     language: string
@@ -135,77 +135,36 @@ export type Database = {
                     broken_code: string
                     created_at?: string
                     difficulty: string
-                    explanation: string
+                    explantion: string
                     hint?: string | null
                     id?: string
-                    langauge: string
+                    language: string
                     last_used_on?: string | null
                     prompt: string
                     title: string
-                    xp_reward?: number
+                    xp_reward?: number  
                 }
                 Update: {
                     answer_pattern?: string
                     broken_code?: string
                     created_at?: string
                     difficulty?: string
-                    explanation?: string
-                    hint?: string
+                    explantion?: string
+                    hint?: string | null
                     id?: string
-                    langauge?: string
+                    language?: string
                     last_used_on?: string | null
                     prompt?: string
                     title?: string
-                    xp_reward?: number
-                }
-                Relationships: []
-            }
-            challenges: {
-                Row: {
-                    broken_code: string
-                    challenge_date: string
-                    created_at: string
-                    difficulty: string
-                    hint: string
-                    id: string
-                    language: string
-                    prompt: string
-                    title: string
-                    xp_reward: number
-                    source: "ai" | "template"
-                }
-                Insert: {
-                    broken_code: string
-                    challenge_date: string
-                    created_at?: string
-                    difficulty?: string
-                    hint?: string
-                    id?: string
-                    language: string
-                    prompt: string
-                    title: string
-                    xp_reward?: number
-                    source?: "ai" | "template"
-                } 
-                Update: {
-                    broken_code?: string
-                    challenge_date?: string
-                    created_at?: string
-                    difficulty?: string
-                    hint?: string
-                    id?: string
-                    language?: string
-                    prompt?: string
-                    title?: string
-                    xp_reward?: number
+                    xp_reward?: number  
                 }
                 Relationships: []
             }
             comment_votes: {
                 Row: {
-                    comment_id : string
-                    created_at?: string
-                    id?: string
+                    comment_id: string
+                    created_at: string
+                    id: string
                     user_id: string
                 }
                 Insert: {
@@ -245,7 +204,7 @@ export type Database = {
                 }
                 Insert: {
                     client_updated_at?: string
-                    content: string
+                    content?: string
                     created_at?: string
                     id?: string
                     is_deleted?: boolean
@@ -253,7 +212,7 @@ export type Database = {
                     tags?: string[]
                     title?: string
                     updated_at?: string
-                    user_id: string
+                    user_id: string 
                 }
                 Update: {
                     client_updated_at?: string
@@ -265,7 +224,7 @@ export type Database = {
                     tags?: string[]
                     title?: string
                     updated_at?: string
-                    user_id?: string
+                    user_id?: string 
                 }
                 Relationships: []
             }
@@ -276,7 +235,7 @@ export type Database = {
                     enabled: boolean
                     id: string
                 }
-                Insert: {
+                Insert:  {
                     created_at?: string
                     email: string
                     enabled?: boolean
@@ -302,6 +261,8 @@ export type Database = {
                     onboarded: boolean
                     role: string
                     skill_level: string
+                    country: string | null
+                    region: string | null
                     tagline: string | null
                     tech_stack: string[]
                     updated_at: string
@@ -321,7 +282,9 @@ export type Database = {
                     onboarded?: boolean
                     role?: string
                     skill_level?: string
-                    taglie?: string | null
+                    country?: string | null
+                    region?: string | null
+                    tagline?: string | null
                     tech_stack?: string[]
                     updated_at?: string
                     user_id: string
@@ -335,11 +298,13 @@ export type Database = {
                     created_at?: string
                     display_name?: string | null
                     github_username?: string | null
-                    id?: string 
+                    id?: string
                     is_public?: boolean
                     onboarded?: boolean
                     role?: string
                     skill_level?: string
+                    country?: string | null
+                    region?: string | null
                     tagline?: string | null
                     tech_stack?: string[]
                     updated_at?: string
@@ -350,6 +315,334 @@ export type Database = {
                 }
                 Relationships: []
             }
+            projects: [
+                Row: {
+                    created_at: string
+                    description: string | null
+                    id: string
+                    is_public: boolean
+                    repo_url: string | null
+                    tags: string[]
+                    title: string
+                    updated_at: string
+                    url: string | null
+                    user_id: string
+                }
+                Insert: {
+                    created_at?: string
+                    description?: string | null
+                    id?: string
+                    is_public?: boolean
+                    repo_url?: string | null
+                    tags?: string[]
+                    title: string
+                    updated_at?: string
+                    url?: string | null
+                    user_id: string
+                }
+                Update: {
+                    created_at?: string
+                    description?: string | null
+                    id?: string
+                    is_public?: boolean
+                    repo_url?: string | null
+                    tags?: string[]
+                    title?: string
+                    updated_at?: string
+                    url?: string | null
+                    user_id?: string
+                }
+                Relationships: []
+            ]
+            review_comments: {
+                Row: {
+                    content: string
+                    created_at: string
+                    id: string
+                    kind: string
+                    line_end: number
+                    review_id: string
+                    user_id: string
+                }
+                Insert: {
+                    content: string
+                    created_at?: string
+                    id?: string
+                    kind?: string
+                    line_end?: number
+                    review_id?: string
+                    user_id: string
+                }
+                Update: {
+                    content?: string
+                    created_at?: string
+                    id?: string
+                    kind?: string
+                    line_end?: number
+                    review_id?: string
+                    user_id?: string
+                }
+                Relationships: [
+                    {
+                        foreignKeyName: "review_comments_review_id_fkey"
+                        columns: ["review_id"]
+                        isOneToOne: false
+                        referencedRelation: "review_requests"
+                        referencedColumns: ["id"]
+                    },
+                ]
+            }
+            review_requests: {
+                Row: {
+                    code: string
+                    created_at: string
+                    description: string | null
+                    id: string
+                    language: string
+                    status: string
+                    title: string
+                    updated_at: string
+                    user_id: string
+                }
+                Insert: {
+                    code: string
+                    created_at?: string
+                    description?: string | null
+                    id?: string
+                    language?: string
+                    status?: string
+                    title: string
+                    updated_at?: string
+                    user_id: string
+                }
+                Update: {
+                    code?: string
+                    created_at?: string
+                    description?: string | null
+                    id?: string
+                    language?: string
+                    status?: string
+                    title?: string
+                    updated_at?: string
+                    user_id?: string
+                }
+                Relationships: []
+            }
+            snippets: {
+                Row: {
+                    code: string
+                    created_at: string
+                    description: string | null
+                    id: string
+                    is_public: boolean
+                    language: string
+                    tags: string[]
+                    title: string
+                    updates_at: string
+                    user_id: string
+                }
+                Insert: {
+                    code: string
+                    created_at?: string
+                    description?: string | null
+                    id?: string
+                    is_public?: boolean
+                    language?: string
+                    tags?: string[]
+                    title: string
+                    updates_at?: string
+                    user_id: string
+                }
+                Update: {
+                    code?: string
+                    created_at?: string
+                    description?: string | null
+                    id?: string
+                    is_public?: boolean
+                    language?: string
+                    tags?: string[]
+                    title?: string
+                    updates_at?: string
+                    user_id?: string
+                }
+                Relationships: []
+            }
+            user_roles: {
+                Row: {
+                    created_at: string
+                    id: string
+                    role: Database["public"]["Enums"]["app_role"]
+                    user_id: string
+                }
+                Insert: {
+                    created_at?: string
+                    id?: string
+                    role: Database["public"]["Enums"]["app_role"]
+                    user_id: string
+                }
+                Update: {
+                    created_at?: string
+                    id?: string
+                    role?: Database["public"]["Enums"]["app_role"]
+                    user_id?: string
+                }
+                Relationships: []
+            }
+        }
+        Views: {
+            [_ in never]: never
+        }
+        Functions: {
+            has_role: {
+                Args: {
+                    _role: Database["public"]["Enums"]["app_role"]
+                    _user_id: string
+                }
+                Returns: boolean
+            }
+            notify_admin_event: {
+                Args: { _king: string; _payload: Json }
+                Returns: undefined
+            }
+            publish_daily_challenge: { Args: never; Returns: string }
+            submit_challenge_answer: {
+                Args: { _answer: string; _challenge_id: string }
+                Returns: Json
+            }
+        }
+        Enums:{
+            app_role: "admin" | "moderator" | "user"
+        }
+        CompositeTypes: {
+            [_ in never]: never
         }
     }
 }
+
+type DatabaseWithoutInternals = Omit<Database, "_InternalSupabase">
+
+type DefaultSchema =  DatabaseWithoutInternals[Extract<keyof Database, "public">]
+
+export type Tables<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Table"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never = never
+> = DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] & 
+    DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions['schema']]["Views"])[TableName] extends {
+        Row: infer r
+    }
+    ? R
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+    DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] & DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R
+    }
+    ? R
+    : never
+  : never
+
+export type TableInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals }
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never =  never
+> = DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+     }
+     ? I
+     : never
+    : never
+
+export type TableUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never 
+> = DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOPtions] extends { 
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
+
+    
+export type Enums<
+  DefaultSchemaEnumNameOrptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never = never
+> = DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+    
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof DatabaseWithoutInternals },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never
+
+> = PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
+
+export const Constants = {
+    public: {
+        Enums: {
+            app_role: ["admin", "moderator", "user"]
+        },
+    },
+} as const
+

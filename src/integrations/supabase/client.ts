@@ -5,7 +5,7 @@ function isNewSupabaseApiKey(value: string): boolean {
     return value.startsWith('sb_publishable_') || value.startsWith('sb_secret_');
 }
 
-function createSupabaseFetch(supabasekey: string): typeof fetch {
+function createSupabaseFetch(supabaseKey: string): typeof fetch {
     return (input, init) => {
         const headers = new Headers(
             typeof Request !== 'undefined' && input instanceof Request ? input.headers : undefined,   
@@ -32,7 +32,7 @@ function createSupabaseClient() {
     if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
         const missing = [
             ...(!SUPABASE_URL ? ['SUPABASE_URL'] : []),
-            ...(!SUPABASE_PUBLISHABLE_KEY ? ['SUPABASE_PUBLISHABLE_KEY'] : [],)
+            ...(!SUPABASE_PUBLISHABLE_KEY ? ['SUPABASE_PUBLISHABLE_KEY'] : []),
         ];
         const message = `Missing Supabase Environmant variable(s): ${missing.join(', ')}.Add Supabase env in your .env file.`;
         console.error('[Supabase] ${message');
